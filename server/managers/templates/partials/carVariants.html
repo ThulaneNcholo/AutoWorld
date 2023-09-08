@@ -1,0 +1,16 @@
+<div class="col-12" id="carVariant">
+  <select
+    class="form-select py-3 mb-3"
+    aria-label="Default select example"
+    onclick="showInfo(event)"
+    hx-post="{% url 'main-search-btn' %}"
+    hx-target="#mainbtn"
+    name="carVariant"
+    required
+  >
+    <option value="None">Select Car Variant</option>
+    {% for data in carVariant %}
+    <option value="{{data.id}}">{{data.name}}</option>
+    {% endfor %}
+  </select>
+</div>

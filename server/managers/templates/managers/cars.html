@@ -1,0 +1,137 @@
+{% extends 'client/base.html' %}
+<!-- divider  -->
+{% load static %}
+<!-- divider  -->
+{% block content %}
+<style>
+  /* Colors */
+  :root {
+    --primary-color: #222222;
+    --background-color: #e4eaff;
+    --secondary-color: #4a4685;
+    --secondary-background: #f5f5f7;
+  }
+
+  a {
+    text-decoration: none;
+    color: inherit;
+  }
+
+  .heading_style {
+    font-weight: 600;
+    line-height: 30px;
+  }
+
+  .cover_image {
+    height: 250px;
+    width: 100%;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    border-radius: 12px;
+  }
+
+  .heart_icon {
+    font-size: 20px;
+    color: white;
+  }
+
+  .car_title {
+    font-weight: 400;
+    line-height: 20px;
+    color: var(--primary-color);
+  }
+
+  .secondary_text {
+    color: var(--primary-color);
+  }
+
+  .icon_margin {
+    margin-right: 10px;
+  }
+
+  .myCar_nav {
+    width: 100%;
+    border-radius: 12px;
+    padding-top: 14px;
+    padding-bottom: 14px;
+    padding-left: 24px;
+    padding-right: 24px;
+  }
+
+  .myCars_container {
+    background-color: var(--secondary-background);
+    border-radius: 12px;
+  }
+
+  .btn-group {
+    width: 100%;
+    display: flex;
+    gap: 10px; /* Adjust the value to set the desired spacing */
+  }
+
+  .cars_btns {
+    border-radius: 12px;
+    width: 100%;
+    margin-right: 10px;
+  }
+</style>
+
+<div class="container my-5">
+  <div class="btn-group" role="group" aria-label="Basic outlined example">
+    <button
+      id="saleBtn"
+      type="button"
+      onclick="showForSale(event)"
+      class="btn btn-outline-dark cars_btns active py-md-3 py-2"
+    >
+      For Sale
+    </button>
+    <button
+      type="button"
+      onclick="showSold(event)"
+      class="btn btn-outline-dark cars_btns py-md-3 py-2"
+    >
+      Sold Cars
+    </button>
+  </div>
+</div>
+
+<div class="container mt-5">
+  <!-- ======= For Sale ======= -->
+  <div id="forsale">{% include 'myCars/forSale.html' %}</div>
+
+  <!-- ======= Sold Cars ======= -->
+  <div id="sold" style="display: none">{% include 'myCars/sold.html' %}</div>
+
+  <div style="height: 200px; width: 100%"></div>
+</div>
+
+<script>
+  function showForSale(event) {
+    event.preventDefault();
+    document.getElementById("forsale").style.display = "block";
+    document.getElementById("sold").style.display = "none";
+  }
+
+  function showSold(event) {
+    event.preventDefault();
+    document.getElementById("forsale").style.display = "none";
+    document.getElementById("sold").style.display = "block";
+  }
+
+  // Get all the buttons within the btn-group
+  const buttons = document.querySelectorAll(".btn-group button");
+
+  // Add click event listener to each button
+  buttons.forEach((button) => {
+    button.addEventListener("click", () => {
+      // Remove the active class from all buttons
+      buttons.forEach((btn) => btn.classList.remove("active"));
+
+      // Add the active class to the clicked button
+      button.classList.add("active");
+    });
+  });
+</script>
+{% endblock %}

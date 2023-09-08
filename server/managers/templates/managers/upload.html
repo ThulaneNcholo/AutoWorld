@@ -1,0 +1,184 @@
+{% extends 'client/base.html' %}
+<!-- divider  -->
+{% block content %}
+
+<style>
+  /* Colors */
+  :root {
+    --primary-color: #222222;
+    --background-color: #e4eaff;
+    --secondary-color: #4a4685;
+    --secondary-background: #f5f5f7;
+  }
+
+  .btn-next {
+    background-color: var(--primary-color);
+    width: 100%;
+    color: white;
+    border-radius: 8px;
+    padding-top: 14px;
+    padding-bottom: 14px;
+    padding-left: 24px;
+    padding-right: 24px;
+    border-color: var(--primary-color);
+  }
+
+  .btn-next:hover {
+    color: white;
+  }
+
+  /* transition: box-shadow 0.2s var(--itr-yy-z),transform 0.1s var(--itr-yy-z);  */
+</style>
+
+<div class="container">
+  <h1 class="mb-3">Upload</h1>
+
+  <form method="POST" enctype="multipart/form-data" autocomplete="off">
+    {% csrf_token %}
+    <div class="row mb-5">
+      <!-- ======= Car Make ======= -->
+      {% include 'partials/carMake.html' %}
+      <!-- ======= Car Model Selections ======= -->
+      {% include 'partials/carModels.html' %}
+
+      <!-- ======= Car Model Variant Selection ======= -->
+      {% include 'partials/carVariants.html' %}
+    </div>
+
+    <!-- ======= Car Information ======= -->
+    <div class="mb-5" id="generalInfo" style="display: none">
+      {% include 'formData/general.html' %}
+    </div>
+
+    <!-- ======= Car Engine ======= -->
+    <div class="mb-5" id="Engine" style="display: none">
+      {% include 'formData/engine.html' %}
+    </div>
+
+    <!-- ======= Economy ======= -->
+    <div class="mb-5" id="Economy" style="display: none">
+      {% include 'formData/economy.html' %}
+    </div>
+
+    <!-- ======= Safety ======= -->
+    <div class="mb-5" id="safety" style="display: none">
+      {% include 'formData/safety.html' %}
+    </div>
+
+    <!-- ======= Features ======= -->
+    <div class="mb-5" id="Features" style="display: none">
+      {% include 'formData/features.html' %}
+      <div id="SelectedFeature" class="mt-4">
+        {% include 'partials/select_feature.html' %}
+      </div>
+      <button class="btn btn-next mt-4" onclick="showSpecs(event)">
+        Next Section
+      </button>
+    </div>
+
+    <!-- ======= Specifications ======= -->
+    <div class="mb-5" id="Specifications" style="display: none">
+      {% include 'formData/Specifications.html' %}
+    </div>
+
+    <!-- ======= Images ======= -->
+    <div class="mb-5" id="CarImages" style="display: none">
+      {% include 'formData/carImages.html' %}
+    </div>
+
+    <!-- ======= location ======= -->
+    <div class="mb-5" id="location" style="display: none">
+      <h3 class="mb-3 fw-bold">Location</h3>
+      <div class="row">
+        <div class="col-12 col-md-6">
+          <select
+            class="form-select mb-3 py-3"
+            aria-label="Default select example"
+            hx-post="{% url 'city-filter' %}"
+            hx-target="#city"
+            name="province"
+          >
+            <option selected>Select Province</option>
+            {% for data in province %}
+            <option value="{{data.id}}">{{data.name}}</option>
+            {% endfor %}
+          </select>
+        </div>
+        <div class="col-12 col-md-6">
+          <div id="city">{% include 'formData/location.html' %}</div>
+        </div>
+      </div>
+      <!-- ======= User Information ======= -->
+      {% include 'formData/user_info.html' %}
+      <button name="submit_application" class="btn btn-next my-4" type="submit">
+        Complete Form
+      </button>
+    </div>
+  </form>
+</div>
+
+<div style="height: 200px; width: 100%"></div>
+
+<script>
+  function showInfo(event) {
+    event.preventDefault();
+    document.getElementById("generalInfo").style.display = "block";
+  }
+
+  function showEngine(event) {
+    event.preventDefault();
+    document.getElementById("Engine").style.display = "block";
+
+    var targetSection = document.getElementById("Engine");
+    targetSection.scrollIntoView({ behavior: "smooth" });
+  }
+
+  function showEconomy(event) {
+    event.preventDefault();
+    document.getElementById("Economy").style.display = "block";
+
+    var targetSection = document.getElementById("Economy");
+    targetSection.scrollIntoView({ behavior: "smooth" });
+  }
+
+  function showSafety(event) {
+    event.preventDefault();
+    document.getElementById("safety").style.display = "block";
+
+    var targetSection = document.getElementById("safety");
+    targetSection.scrollIntoView({ behavior: "smooth" });
+  }
+
+  function showFeatures(event) {
+    event.preventDefault();
+    document.getElementById("Features").style.display = "block";
+
+    var targetSection = document.getElementById("Features");
+    targetSection.scrollIntoView({ behavior: "smooth" });
+  }
+
+  function showSpecs(event) {
+    event.preventDefault();
+    document.getElementById("Specifications").style.display = "block";
+
+    var targetSection = document.getElementById("Specifications");
+    targetSection.scrollIntoView({ behavior: "smooth" });
+  }
+
+  function showImages(event) {
+    event.preventDefault();
+    document.getElementById("CarImages").style.display = "block";
+
+    var targetSection = document.getElementById("CarImages");
+    targetSection.scrollIntoView({ behavior: "smooth" });
+  }
+
+  function showLocation(event) {
+    event.preventDefault();
+    document.getElementById("location").style.display = "block";
+
+    var targetSection = document.getElementById("location");
+    targetSection.scrollIntoView({ behavior: "smooth" });
+  }
+</script>
+{% endblock %}

@@ -1,0 +1,6 @@
+<select class="form-select" aria-label="Default select example" name="Variants">
+  <option value="None">Select Variant</option>
+  {% for data in variants %}
+  <option value="{{data.id}}">{{data.name}}</option>
+  {% endfor %}
+</select>

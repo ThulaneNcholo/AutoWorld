@@ -1,0 +1,35 @@
+<h3 class="mb-3 fw-bold">Car Features</h3>
+<div class="row">
+  <!-- end input item  -->
+  <div class="col-12 col-md-8">
+    <div class="form-floating mb-3">
+      <input
+        type="text"
+        class="form-control"
+        id="floatingInput"
+        placeholder="Feature Name"
+        name="feature_filter"
+        hx-post="{% url 'features-filter' %}"
+        hx-trigger="keyup changed delay:500ms, search"
+        hx-target="#featureSearch"
+        hx-indicator=".htmx-indicator"
+      />
+      <label for="floatingInput">Feature Name</label>
+    </div>
+  </div>
+  <div class="col-12 col-md-4">
+    <button
+      type="submit"
+      class="btn btn-next"
+      style="width: 100%"
+      name="submit_btn"
+      hx-post="{% url 'create-feature' %}"
+      hx-target="#SelectedFeature"
+      hx-indicator=".htmx-indicator"
+    >
+      submit feature
+    </button>
+  </div>
+</div>
+
+<div id="featureSearch">{% include 'partials/featuresPartial.html' %}</div>

@@ -1,0 +1,33 @@
+{% for feature in carData.features.all %}
+<div class="d-flex">
+  <i class="bi bi-check-circle-fill"></i>
+  <p class="mx-2">{{feature.name}}</p>
+</div>
+{% endfor %}
+<!-- edit button  -->
+<div class="contact_container fixed-bottom pt-3 shadow">
+  <div class="container">
+    <div class="row">
+      <div class="col">
+        <button
+          type="button"
+          class="btn btn-dark btn_contact"
+          onclick="editSummary(event)"
+        >
+          Edit
+        </button>
+      </div>
+      <div class="col-3">
+        <button
+          type="button"
+          class="btn btn-outline-dark btn_contact"
+          data-bs-dismiss="offcanvas"
+          aria-label="Close"
+        >
+          X
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+<div style="height: 100px; width: 100%"></div>

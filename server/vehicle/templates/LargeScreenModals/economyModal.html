@@ -1,0 +1,28 @@
+<!-- Button trigger modal -->
+<a href="#economyModal" data-bs-toggle="modal">
+  {% include 'buttons/economyBtn.html' %}
+</a>
+
+<!-- Modal -->
+<div
+  class="modal fade"
+  id="economyModal"
+  tabindex="-1"
+  aria-labelledby="economyModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog modal-dialog-scrollable">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="economyModalLabel">Economy</h5>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
+      </div>
+      <div class="modal-body">{% include 'BodyData/economydata.html' %}</div>
+    </div>
+  </div>
+</div>

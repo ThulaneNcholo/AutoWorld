@@ -1,0 +1,46 @@
+<a href="#leadsModal{{data.id}}" data-bs-toggle="modal">
+  {% include 'partials/leadsData.html' %}
+</a>
+
+<!-- Modal -->
+<div
+  class="modal fade"
+  id="leadsModal{{data.id}}"
+  tabindex="-1"
+  aria-labelledby="leadsModalLabel"
+  aria-hidden="true"
+>
+  <div
+    class="modal-dialog modal-dialog-centered modal-lg modal-dialog-scrollable"
+  >
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="leadsModalLabel">#{{data.ref}}</h5>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
+      </div>
+      <div class="modal-body">
+        {% include 'partials/leadsBody.html' %}
+        <!-- <div style="height: 30px; width: 100%"></div> -->
+        <!-- mark as compomlete  -->
+        <form method="POST">
+          {% csrf_token %}
+          <input type="text" name="leadID" value="{{data.id}}" hidden="true" />
+          <center>
+            <button
+              type="submit"
+              name="complet_lead"
+              class="btn btn-dark complete_btn rounded-pill shadow shadow-sm my-5 py-3"
+            >
+              complete lead
+            </button>
+          </center>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

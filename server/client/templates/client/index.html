@@ -1,0 +1,346 @@
+{% extends 'client/base.html' %}
+<!-- divider  -->
+{% load static %}
+<!-- divider  -->
+{% load humanize %}
+<!-- divider  -->
+{% block content %}
+<style>
+  :root {
+    --primary-color: #222222;
+    --background-color: #e4eaff;
+    --secondary-color: #4a4685;
+    --secondary-background: #f5f5f7;
+  }
+
+  a {
+    text-decoration: none;
+    color: inherit;
+  }
+
+  /* scroll buttons  */
+  .scroll_container {
+    overflow-x: auto !important;
+    white-space: nowrap !important;
+  }
+
+  .brand_btn {
+    border-radius: 12px;
+    padding-top: 9px;
+    padding-bottom: 9px;
+    padding-left: 24px;
+    padding-right: 24px;
+  }
+
+  .bodytype_btn {
+    border-radius: 12px;
+    padding-top: 14px;
+    padding-bottom: 14px;
+    padding-left: 24px;
+    padding-right: 24px;
+  }
+
+  /* Feature styling  */
+  .main_container {
+    border-radius: 12px;
+    background-color: var(--secondary-background);
+  }
+
+  .image_container {
+    height: 100px;
+    width: 130px;
+    border-radius: 12px;
+    margin-right: 10px;
+  }
+
+  .feature_image {
+    height: 100%;
+    width: 100%;
+    border-radius: 12px;
+    object-fit: cover;
+  }
+
+  .p-tags {
+    font-size: 14px;
+  }
+
+  .see_all_btn {
+    width: 70%;
+    border-radius: 12px;
+  }
+
+  .news_image {
+    height: 300px;
+    width: 100%;
+    object-fit: cover;
+    border-radius: 12px;
+  }
+
+  /* Lastest News  */
+  .car_title {
+    font-weight: 400;
+    line-height: 20px;
+    color: var(--primary-color);
+  }
+
+  .btn_submit {
+    background-color: var(--primary-color);
+    width: 100%;
+    color: white;
+    border-radius: 12px;
+    padding-top: 14px;
+    padding-bottom: 14px;
+    padding-left: 24px;
+    padding-right: 24px;
+    border-color: var(--primary-color);
+  }
+
+  .cover_tag {
+    height: 300px;
+    width: 100%;
+    object-fit: cover;
+  }
+
+  .hero_image {
+    height: 400px;
+    width: 100%;
+    background-size: cover;
+    /* background-repeat: no-repeat;  */
+    /* background-image: linear-gradient(rgba(0, 0, 0, 0.5),rgba(0, 0, 0, 0.5)), url({{clinic.hero_image.url}});";  */
+    background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
+      url("{% static '/images/listing.jpg' %}");
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .search_filter_hero {
+    height: 400px;
+    width: 100%;
+    background-size: cover;
+    /* background-repeat: no-repeat;  */
+    /* background-image: linear-gradient(rgba(0, 0, 0, 0.5),rgba(0, 0, 0, 0.5)), url({{clinic.hero_image.url}});";  */
+    background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
+      url("{% static '/images/bmw.jpg' %}");
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-bottom-left-radius: 12px;
+    border-bottom-right-radius: 12px;
+  }
+
+  .sell_icon {
+    font-size: 50px;
+  }
+
+  .header_image {
+    height: 200px;
+    width: 100%;
+    object-fit: cover;
+  }
+
+  .news_letter_container {
+    background-color: var(--primary-color);
+  }
+
+  .results_btn {
+    width: 80%;
+    border-radius: 23px;
+  }
+
+  .scroll_container::-webkit-scrollbar {
+    display: none; /* Hide scrollbar for Chrome, Safari, and Opera */
+  }
+</style>
+
+<!-- ======= header Image  ======= -->
+<div>
+  <img src="{% static '/images/mini.jpg' %}" alt="" class="header_image" />
+</div>
+
+<!-- ======= Messages Notification  ======= -->
+<div class="container">
+  {% for message in messages %}
+  <div class="alert alert-danger my-5" role="alert">{{message}}</div>
+  {% endfor %}
+</div>
+
+<!-- ======= Main Filter Component  ======= -->
+<div class="container mt-5">
+  <!-- ======= Car Make ======= -->
+  {% include 'partials/newMake.html' %}
+
+  <!-- ======= Car Model ======= -->
+  <div id="newModelID">{% include 'partials/newModel.html' %}</div>
+
+  <form method="POST">
+    {% csrf_token %}
+    <!-- ======= Car Variant ======= -->
+    <div id="newVarientID">{% include 'partials/newVariant.html' %}</div>
+
+    <center>
+      <button
+        type="submit"
+        name="submit_search"
+        class="btn btn-dark py-3 results_btn my-5"
+      >
+        Show Results
+      </button>
+    </center>
+  </form>
+</div>
+
+<!-- ======= Car Brands  ======= -->
+<div class="container mt-5">
+  <div class="d-flex justify-content-between mb-3">
+    <h3 class="fw-bold">Car Brands</h3>
+    <i class="bi bi-arrow-right-circle-fill"></i>
+  </div>
+  <div class="scroll_container">
+    {% for data in carBrands %}
+    <a href="{% url 'new-car-results' data.id 0 %}">
+      <button class="btn btn-outline-dark brand_btn">{{data.name}}</button>
+    </a>
+    {% endfor %}
+  </div>
+</div>
+
+<!-- ======= Body Type Filter  ======= -->
+<div class="container mt-5">
+  <div class="d-flex justify-content-between mb-3">
+    <h3 class="fw-bold">Body type</h3>
+    <i class="bi bi-arrow-right-circle-fill"></i>
+  </div>
+  <div class="scroll_container">
+    {% for data in bodyType %}
+    <a href="#">
+      <button
+        class="btn btn-light bodytype_btn border"
+        style="margin-right: 7px"
+      >
+        <i class="bi bi-car-front"></i>
+        <p class="mb-0">{{data.name}}</p>
+      </button>
+    </a>
+
+    {% endfor %}
+  </div>
+</div>
+
+<!-- ======= Featured Cars  ======= -->
+<div class="container mt-5">
+  <div class="d-flex justify-content-between mb-3">
+    <h3 class="fw-bold mb-3">Featured</h3>
+    <a href="{% url 'new-car-results' 0 1 %}">
+      <p class="mb-0 text-secondary">see all</p>
+    </a>
+  </div>
+  {% include 'vehicle/featuredCars.html' %}
+  <center>
+    <a href="{% url 'new-car-results' 0 1 %}">
+      <button class="btn btn-dark see_all_btn mb-5">see all</button>
+    </a>
+  </center>
+</div>
+
+<!-- ======= Sell Car  ======= -->
+<div class="my-5 hero_image">
+  <div>
+    <center>
+      <h1 class="text-white">Sell My Car</h1>
+      <i class="bi bi-car-front text-light sell_icon"></i>
+      <p class="text-light">
+        Discover the flexibility of two distinct choices: retain maximum control
+        by selling your car privately, or enjoy a seamless and hassle-free
+        experience by selling to a dealership.
+      </p>
+      <a href="{% url 'list-car' %}">
+        <button class="btn btn-light">sell my car now</button>
+      </a>
+    </center>
+  </div>
+  <!-- <img src="{% static '/images/listing.jpg' %}" alt="" class="cover_tag" />    -->
+</div>
+
+<!-- ======= Lasted News  ======= -->
+<div class="container mt-5">
+  <div class="d-flex justify-content-between mb-3">
+    <h3 class="fw-bold mb-3">Latest News</h3>
+    <a href="{% url 'latest-news' %}">
+      <p class="mb-0 text-secondary">see all</p>
+    </a>
+  </div>
+
+  <div class="row">
+    {% for data in latestNews %}
+    <div class="col-12 col-md-6 col-lg-3 mb-5">
+      <div>
+        <img src="{{data.image1.url}}" alt="" class="news_image mb-3" />
+        <p class="car_title fw-bold">{{data.title}}</p>
+        <p class="text-secondary mb-3">
+          {{data.article|truncatechars:200}}
+          <span class="fw-bold text-black">
+            {% include 'partials/newsDetails.html' %}
+          </span>
+        </p>
+        <div class="d-flex">
+          <i class="bi bi-calendar-week-fill" style="margin-right: 10px"></i>
+          <p class="mb-0 text-secondary">{{data.date_created|date:"l,d M"}}</p>
+        </div>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+</div>
+
+<!-- ======= Insurance  ======= -->
+<div class="container insurance_container mt-5 bg-light py-3">
+  <div>
+    <center>
+      <h1 class="text-black">Need car insurance?</h1>
+      <i class="bi bi-postcard-fill text-black sell_icon"></i>
+      <p class="text-black">
+        Complete the form below to get in touch with our reliable insurance
+        partner. They will reach out to you promptly and offer a personalized
+        insurance quote that fits your requirements, ensuring you receive the
+        best coverage at a competitive price.
+      </p>
+      <a href="{% url 'insurance' %}">
+        <button class="btn btn-outline-dark">Get insurance qoute</button>
+      </a>
+    </center>
+  </div>
+</div>
+
+<!-- ======= News Letter  ======= -->
+<div class="news_letter_container py-5 mt-5">
+  <div class="container">
+    <h3 class="text-light mb-3">Sign up to our weekly Newsletter</h3>
+    <form>
+      <div class="form-floating mb-3">
+        <input
+          type="text"
+          class="form-control"
+          id="floatingInput"
+          placeholder="Full Name"
+        />
+        <label for="floatingInput">Full Name</label>
+      </div>
+      <div class="form-floating mb-3">
+        <input
+          type="email"
+          class="form-control"
+          id="floatingInput"
+          placeholder="name@example.com"
+        />
+        <label for="floatingInput">Email address</label>
+      </div>
+      <center>
+        <button class="btn btn-outline-light px-5">Sign Up</button>
+      </center>
+    </form>
+  </div>
+</div>
+
+<div style="height: 200px; width: 100%"></div>
+{% endblock %}

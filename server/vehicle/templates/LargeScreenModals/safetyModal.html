@@ -1,0 +1,28 @@
+<!-- Button trigger modal -->
+<a href="#safetyModal" data-bs-toggle="modal">
+  {% include 'buttons/safetyBtn.html' %}
+</a>
+
+<!-- Modal -->
+<div
+  class="modal fade"
+  id="safetyModal"
+  tabindex="-1"
+  aria-labelledby="safetyModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="safetyModalLabel">Safety</h5>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
+      </div>
+      <div class="modal-body">{% include 'BodyData/economydata.html' %}</div>
+    </div>
+  </div>
+</div>

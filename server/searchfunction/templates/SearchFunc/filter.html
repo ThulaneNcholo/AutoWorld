@@ -1,0 +1,18 @@
+{% extends 'client/base.html' %}
+<!-- divider  -->
+{% load static %}
+<!-- divider  -->
+{% block content %}
+
+<div class="container">
+  <h1 class="mb-3">Search Filter</h1>
+  <a href="{% url 'cars-results' %}">Results page</a>
+
+  <!-- form partial   -->
+  {% include 'partials/searchForm.html' %}
+</div>
+
+<a href="{% url 'redirect-form'%}">redirect form page</a>
+
+<div style="height: 200px; width: 100%"></div>
+{% endblock %}

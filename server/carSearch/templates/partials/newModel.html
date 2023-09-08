@@ -1,0 +1,21 @@
+<form method="POST">
+  {% csrf_token %}
+
+  <select
+    class="form-select py-3 mb-3"
+    aria-label="Default select example"
+    name="newModelSearch"
+    hx-post="{% url 'new-variant-search' %}"
+    hx-target="#newVarientID"
+  >
+    {% if selectedModel %}
+    <option value="{{selectedModel.id}}">{{selectedModel.name}}</option>
+    {% else%}
+    <option selected value="None">Select Model</option>
+    {% endif %} 
+    <!-- divider  -->
+    {% for data in models %}
+    <option value="{{data.id}}">{{data.name}}</option>
+    {% endfor %}
+  </select>
+</form>

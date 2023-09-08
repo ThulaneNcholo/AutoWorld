@@ -1,0 +1,48 @@
+{% extends 'client/base.html' %}
+<!-- divider  -->
+{% load static %}
+<!-- divider  -->
+{% block content %}
+<style>
+  /* Colors */
+  :root {
+    --primary-color: #222222;
+    --background-color: #e4eaff;
+    --secondary-color: #4a4685;
+    --secondary-background: #f5f5f7;
+  }
+
+  .results_btn {
+    width: 50%;
+  }
+</style>
+
+<div class="container pt-5">
+  <div class="py-5">
+    <a href="{% url 'new-car-results'%}">New Results Page</a>
+  </div>
+  <!-- ======= Car Make ======= -->
+  {% include 'partials/newMake.html' %}
+
+  <!-- ======= Car Model ======= -->
+  <div id="newModelID">{% include 'partials/newModel.html' %}</div>
+
+  <form method="POST">
+    {% csrf_token %}
+    <!-- ======= Car Variant ======= -->
+    <div id="newVarientID">{% include 'partials/newVariant.html' %}</div>
+
+    <center>
+      <button
+        type="submit"
+        name="submit_search"
+        class="btn btn-dark py-3 results_btn my-5"
+      >
+        Show Results
+      </button>
+    </center>
+  </form>
+</div>
+
+<div style="height: 200px; width: 100%"></div>
+{% endblock %}

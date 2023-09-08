@@ -1,0 +1,21 @@
+<form method="POST">
+  {% csrf_token %}
+  <select
+    class="form-select py-3 mb-3"
+    aria-label="Default select example"
+    name="newBrand"
+    hx-post="{% url 'new-model' %}"
+    hx-target="#newModelID"
+    required
+  >
+    {% if seletedMake %}
+    <option value="{{seletedMake.id}}">{{seletedMake.name}}</option>
+    {% else %}
+    <option selected value="None">Select Car Brand</option>
+    {% endif %}
+    <!-- divider  -->
+    {% for data in make %}
+    <option value="{{data.id}}">{{data.name}}</option>
+    {% endfor %}
+  </select>
+</form>

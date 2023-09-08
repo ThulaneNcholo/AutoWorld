@@ -1,0 +1,76 @@
+<style>
+  .offcanvas-bottom {
+    height: 90vh;
+    border-top-left-radius: 12px;
+    border-top-right-radius: 12px;
+  }
+
+  .details_image {
+    height: 200px;
+    width: 100%;
+    object-fit: cover;
+    border-radius: 12px;
+  }
+
+  .details_secondary_image {
+    height: 150px;
+    width: 100%;
+    object-fit: cover;
+    border-radius: 12px;
+  }
+</style>
+
+<a
+  data-bs-toggle="offcanvas"
+  href="#newsDetails{{data.id}}"
+  role="button"
+  aria-controls="newsDetails"
+>
+  Read More
+</a>
+
+<div
+  class="offcanvas offcanvas-bottom"
+  tabindex="-1"
+  id="newsDetails{{data.id}}"
+  aria-labelledby="newsDetailsLabel"
+>
+  <div class="offcanvas-header">
+    <!-- <h5 class="offcanvas-title" id="newsDetailsLabel">Offcanvas</h5>  -->
+    <button
+      type="button"
+      class="btn-close text-reset"
+      data-bs-dismiss="offcanvas"
+      aria-label="Close"
+    ></button>
+  </div>
+  <div class="offcanvas-body">
+    <div>
+      <h4 class="mb-3">{{data.title}}</h4>
+      <img src="{{data.image1.url}}" alt="" class="details_image mb-2" />
+      <div class="row mb-3">
+        <div class="col">
+          <img
+            src="{{data.image2.url}}"
+            alt=""
+            class="details_secondary_image"
+          />
+        </div>
+        <div class="col">
+          <img
+            src="{{data.image3.url}}"
+            alt=""
+            class="details_secondary_image"
+          />
+        </div>
+      </div>
+      <div class="d-flex mb-5">
+        <i class="bi bi-calendar-week-fill" style="margin-right: 10px"></i>
+        <p class="mb-0 text-secondary">{{data.date_created|date:"l,d M"}}</p>
+      </div>
+      <p>{{data.article|linebreaks}}</p>
+    </div>
+
+    <div style="height: 100px; width: 100%"></div>
+  </div>
+</div>

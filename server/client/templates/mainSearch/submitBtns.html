@@ -1,0 +1,17 @@
+<div id="mainbtn">
+  {% if showSubmit == 'No'%}
+  <a role="button" class="btn btn_submit mt-4 shadow shadow-sm mb-5">Search</a>
+  {% else %}
+  <button
+    type="submit"
+    name="main_search"
+    class="btn btn_submit mt-4 shadow shadow-sm mb-5"
+  >
+    <i
+      class="bi bi-check-circle-fill text-light"
+      style="margin-right: 15px"
+    ></i>
+    Submit Search
+  </button>
+  {% endif %}
+</div>

@@ -1,0 +1,12 @@
+<select
+  class="form-select py-3 mb-3"
+  aria-label="Default select example"
+  name="city"
+>
+  <option selected>Select City</option>
+  {% for data in cities %}
+  <option value="{{data.id}}">{{data.name}}</option>
+  {% endfor %}
+</select>
+
+

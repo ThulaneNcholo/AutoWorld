@@ -1,0 +1,22 @@
+{% load humanize %}
+
+<div class="col-12 col-md-6 col-lg-12" id="pricePartial">
+  <div>
+    <select
+      class="form-select mb-1 py-3"
+      aria-label="Default select example"
+      hx-post="{% url 'filter-model' %}"
+      hx-target="#carModel"
+      name="newprice"
+    >
+      <option value="None">Price</option>
+      {% for rangeData in rangesList %}
+      <option value="{{rangeData.range}}">
+        R {{rangeData.start|intcomma}} - R {{rangeData.end|intcomma}}
+        [{{rangeData.count}}]
+      </option>
+      {% endfor %}
+    </select>
+  </div>
+</div>
+<!-- end select item  -->

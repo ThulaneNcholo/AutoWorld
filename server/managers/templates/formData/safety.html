@@ -1,0 +1,23 @@
+<h3 class="mb-3 fw-bold">Safety</h3>
+<div class="row">
+  {% for data in safetyFeatures %}
+  <div class="col-6 col-md-3 mb-3">
+    <input
+      type="checkbox"
+      class="btn-check"
+      name="safety"
+      id="option{{data.id}}"
+      autocomplete="off"
+      name="safety"
+      value="{{data.id}}"
+    />
+    <label class="btn btn-outline-dark" for="option{{data.id}}"
+      >{{data.name}}</label
+    >
+  </div>
+  {% endfor %}
+  <!-- end radio item  -->
+</div>
+<button class="btn btn-next mt-4" onclick="showFeatures(event)">
+  Next Section
+</button>

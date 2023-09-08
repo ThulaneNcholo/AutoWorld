@@ -1,0 +1,60 @@
+<style>
+  .refine_offcanvas {
+    height: 50vh !important;
+    border-top-left-radius: 12px;
+    border-top-right-radius: 12px;
+  }
+
+  .refine_btn {
+    width: 100%;
+    border-radius: 12px;
+    margin-right: 20px;
+  }
+</style>
+
+<button
+  class="btn btn-dark refine_btn"
+  data-bs-toggle="offcanvas"
+  data-bs-target="#searchRefine"
+  aria-controls="searchRefine"
+>
+  Refine Search
+</button>
+
+<div
+  class="offcanvas offcanvas-bottom refine_offcanvas"
+  tabindex="-1"
+  id="searchRefine"
+  aria-labelledby="searchRefineLabel"
+>
+  <div class="offcanvas-header">
+    <h5 class="offcanvas-title" id="searchRefineLabel">Refine car search</h5>
+    <button
+      type="button"
+      class="btn-close text-reset"
+      data-bs-dismiss="offcanvas"
+      aria-label="Close"
+    ></button>
+  </div>
+  <div class="offcanvas-body">
+    <form method="POST">
+      {% csrf_token %}
+      <div class="row">
+        <!-- ======= Car Make ======= -->
+        {% include 'partials/carMake.html' %}
+        <!-- ======= Car Model Selections ======= -->
+        {% include 'partials/carModels.html' %}
+
+        <!-- ======= Car Model Variant Selection ======= -->
+        {% include 'partials/carVariants.html' %}
+      </div>
+      <button
+        type="submit"
+        name="refineSearchPost"
+        class="btn btn-dark refine_btn my-3"
+      >
+        Search
+      </button>
+    </form>
+  </div>
+</div>

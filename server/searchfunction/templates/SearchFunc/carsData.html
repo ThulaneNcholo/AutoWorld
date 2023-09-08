@@ -1,0 +1,5 @@
+{% for data in cars %}
+<h5 class="my-4">
+  {{data.year}} {{data.car.make.make.name}} {{data.car.name}}
+</h5>
+{% endfor %}

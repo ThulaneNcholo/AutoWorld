@@ -1,0 +1,25 @@
+<a
+  data-bs-toggle="offcanvas"
+  href="#SafetyDetails"
+  aria-controls="SafetyDetails"
+>
+  {% include 'buttons/safetyBtn.html' %}
+</a>
+
+<div
+  class="offcanvas offcanvas-bottom"
+  tabindex="-1"
+  id="SafetyDetails"
+  aria-labelledby="SafetyDetailsLabel"
+>
+  <div class="offcanvas-header">
+    <h5 class="offcanvas-title" id="SafetyDetailsLabel">Safety</h5>
+    <button
+      type="button"
+      class="btn-close text-reset"
+      data-bs-dismiss="offcanvas"
+      aria-label="Close"
+    ></button>
+  </div>
+  <div class="offcanvas-body">{% include 'BodyData/safetyData.html' %}</div>
+</div>

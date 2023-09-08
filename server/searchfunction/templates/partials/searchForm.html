@@ -1,0 +1,16 @@
+<form method="POST" class="mt-5">
+  {% csrf_token %}
+  <div class="row">
+    <div class="col-12 mb-3">{% include 'partials/brand.html' %}</div>
+    <div class="col-12 mb-3" id="modelCar">
+      {% include 'partials/modelCar.html' %}
+    </div>
+    <div class="col-12 mb-3" id="VariantsCars">
+      {% include 'partials/whipsVariants.html' %}
+    </div>
+  </div>
+
+  <button type="submit" name="filter_testing" class="btn btn-dark my-5">
+    submit filter
+  </button>
+</form>

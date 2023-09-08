@@ -1,0 +1,44 @@
+{% extends 'client/base.html' %}
+<!-- divider  -->
+{% load static %}
+<!-- divider  -->
+{% block content %}
+
+<style>
+  /* Feature styling  */
+  .main_container {
+    border-radius: 12px;
+    background-color: var(--secondary-background);
+  }
+
+  .image_container {
+    height: 100px;
+    width: 130px;
+    border-radius: 12px;
+    margin-right: 10px;
+  }
+
+  .feature_image {
+    height: 100%;
+    width: 100%;
+    border-radius: 12px;
+    object-fit: cover;
+  }
+
+  .p-tags {
+    font-size: 14px;
+  }
+</style>
+
+<div class="container mt-5">
+    <div class="d-flex justify-content-between">
+        {% include 'mainSearch/refineSearch.html' %}
+        {% include 'mainSearch/filterOffcanvas.html' %}
+    </div>
+ 
+</div>
+
+<div class="container mt-5">{% include 'vehicle/featuredCars.html' %}</div>
+
+<div style="height: 200px; width: 100%"></div>
+{% endblock %}

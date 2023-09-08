@@ -1,0 +1,55 @@
+<!-- ======= Upload Car  ======= -->
+<div class="row alignment">
+  <div class="col">
+    <h1 class="heading_style mb-0">My Cars</h1>
+  </div>
+  <div class="col">
+    <a href="{% url 'upload' %}">
+      <button class="btn btn-light border myCar_nav shadow shadow-sm">
+        upload
+      </button>
+    </a>
+  </div>
+</div>
+
+<!-- ======= List My cars start  ======= -->
+<div class="row mt-5">
+  {% for data in myCars %}
+  <div class="col-12 col-md-4 col-lg-3 mb-4">
+    <a href="{% url 'car-details' data.id %}">
+      <div>
+        <div
+          class="cover_image p-3 mb-3"
+          style="background-image: url('{{ data.images.image1.url }}'); position: relative;"
+        >
+          <div class="d-flex justify-content-end">
+            <i class="bi bi-heart-fill heart_icon"></i>
+          </div>
+        </div>
+        <p class="car_title fw-bold">
+          {{data.year}} {{data.car.make.make.name}} {{data.car.make.name}}
+          {{data.car.name}} {{data.transmission}}
+        </p>
+        <div class="d-flex justify-content-between mb-2 secondary_text">
+          <div class="d-flex">
+            <i class="bi bi-speedometer2 icon_margin"></i>
+            <p class="mb-0">{{data.kilometers}} km</p>
+          </div>
+          <div class="d-flex">
+            <i class="bi bi-fuel-pump icon_margin"></i>
+            <p class="mb-0">{{data.Fuel}}</p>
+          </div>
+        </div>
+        <div class="d-flex text-secondary mb-2">
+          <i class="bi bi-geo-alt icon_margin"></i>
+          <p class="mb-0">
+            {{data.sellerInfo.city.name}} {{data.sellerInfo.city.province.name}}
+          </p>
+        </div>
+        <p class="fw-bold secondary_text">R {{data.price}}</p>
+      </div>
+    </a>
+  </div>
+  <!-- end car object  -->
+  {% endfor %}
+</div>

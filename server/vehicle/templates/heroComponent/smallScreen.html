@@ -1,0 +1,218 @@
+<style>
+  .carousel {
+    position: relative;
+    width: 100%;
+    height: 300px;
+    overflow: hidden;
+  }
+
+  .carousel-slide {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    transition: opacity 0.5s ease-in-out;
+  }
+
+  .carousel-slide.active {
+    opacity: 1;
+  }
+
+  .carousel-slide img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .carousel-control {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 24px;
+    color: #fff;
+    text-decoration: none;
+    transition: background-color 0.3s ease-in-out;
+  }
+
+  /* .carousel-control:hover {
+    background-color: rgba(0, 0, 0, 0.8);
+  } */
+
+  .carousel-control.prev {
+    left: 10px;
+  }
+
+  .carousel-control.next {
+    right: 10px;
+  }
+
+  .back-button {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+  }
+
+  .contact_container {
+    padding-bottom: 34px;
+    background-color: white;
+    border-radius: 12px !important;
+  }
+
+  .btn_contact {
+    width: 100%;
+    /* padding-top: 14px;
+    padding-bottom: 14px;
+    padding-left: 24px;
+    padding-right: 24px; */
+  }
+
+  /* bottom navbar  */
+  .bottom_navigation {
+    background-color: white;
+    padding-bottom: 34px;
+  }
+
+  .nav_container {
+    border-radius: 20px;
+    background-color: var(--primary-color);
+  }
+
+  .nav_titles {
+    font-size: 12px;
+  }
+
+  .alignment {
+    align-items: baseline;
+  }
+
+  a {
+    text-decoration: none;
+    color: inherit;
+  }
+</style>
+
+<div class="carousel">
+  <!-- <button
+    type="button"
+    class="btn btn-light back-button fixed-top"
+    style="width: 10%"
+  >
+    <i class="bi bi-chevron-left"></i>
+  </button> -->
+  <div class="carousel-slide active">
+    <img src="{{carData.images.image1.url}}" alt="Image 1" />
+  </div>
+  <div class="carousel-slide">
+    <img src="{{carData.images.image2.url}}" alt="Image 2" />
+  </div>
+  <div class="carousel-slide">
+    <img src="{{carData.images.image3.url}}" alt="Image 3" />
+  </div>
+  <a class="carousel-control prev" href="#"
+    ><i class="bi bi-arrow-left-circle-fill text-white"></i
+  ></a>
+  <a class="carousel-control next" href="#"
+    ><i class="bi bi-arrow-right-circle-fill text-white"></i
+  ></a>
+</div>
+
+<div class="mt-5 container">
+  <!-- ======= Name  ======= -->
+  <h1 class="car_title fw-bold">
+    {{carData.year}} {{carData.car.make.make.name}} {{carData.car.make.name}}
+    {{carData.car.name}}
+  </h1>
+  <p>
+    {{carData.sellerInfo.city.name}}, {{carData.sellerInfo.city.province.name}}
+  </p>
+</div>
+
+<!-- ======= Bottom Navigation  ======= -->
+<div class="fixed-bottom bottom_navigation pt-3">
+  <div class="d-flex justify-content-around mx-3 nav_container p-2 shadow">
+    <center>
+      <a onclick="history.back()">
+        <div>
+          <i class="bi bi-arrow-left-square text-white"></i>
+          <p class="mb-0 text-white nav_titles">Back</p>
+        </div>
+      </a>
+    </center>
+
+    <center>
+      <div>
+        <i class="bi bi-telephone text-white"></i>
+        <p class="mb-0 text-white nav_titles">Call</p>
+      </div>
+    </center>
+
+    <center>
+      <a href="{% url 'message' carData.id %}">
+        <div>
+          <i class="bi bi-chat text-white"></i>
+          <p class="mb-0 text-white nav_titles">Message</p>
+        </div>
+      </a>
+    </center>
+  </div>
+</div>
+
+<!-- <div class="contact_container fixed-bottom pt-3 shadow">
+  <div class="container">
+    <div class="row">
+      <div class="col-2 d-flex align-items-center">
+        <i
+          class="bi bi-arrow-left-square-fill"
+          style="font-size: 28px"
+          onclick="history.back()"
+        ></i>
+      </div>
+      <div class="col">
+        <button type="button" class="btn btn-dark btn_contact shadow shadow-sm">
+          Contact
+        </button>
+      </div>
+      <div class="col">
+        <a href="{% url 'message' carData.id %}">
+          <button
+            type="button"
+            class="btn btn-outline-dark btn_contact shadow shadow-sm"
+          >
+            Message
+          </button>
+        </a>
+      </div>
+    </div>
+  </div>
+</div> -->
+
+<script>
+  // Add JavaScript logic to control the carousel slide transition
+  let slides = document.querySelectorAll(".carousel-slide");
+  let currentSlide = 0;
+
+  function showSlide(slideIndex) {
+    slides[currentSlide].classList.remove("active");
+    slides[currentSlide].style.opacity = 0;
+
+    currentSlide = (slideIndex + slides.length) % slides.length;
+
+    slides[currentSlide].classList.add("active");
+    slides[currentSlide].style.opacity = 1;
+  }
+
+  // Attach event listeners to the previous and next controls
+  document
+    .querySelector(".carousel-control.prev")
+    .addEventListener("click", () => {
+      showSlide(currentSlide - 1);
+    });
+
+  document
+    .querySelector(".carousel-control.next")
+    .addEventListener("click", () => {
+      showSlide(currentSlide + 1);
+    });
+</script>

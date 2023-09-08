@@ -1,0 +1,14 @@
+<select
+  class="form-select"
+  aria-label="Default select example"
+  name="refineModel"
+  hx-post="{% url 'refine-variant' %}"
+  hx-target="#refineVariant"
+>
+  <option selected value="None">Select Model</option>
+  {% for data in carModels %}
+  <option value="{{data.id}}">{{data.name}}</option>
+  {% empty %}
+  <option>Select A Car Brand</option>
+  {% endfor%}
+</select>

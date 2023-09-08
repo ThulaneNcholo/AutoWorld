@@ -1,0 +1,25 @@
+<div class="bg-light shadow shadow-sm p-3 lead_container">
+  <div class="row">
+    <div class="col-2 d-flex align-items-start">
+      <i class="bi bi-person-circle lead_icon"></i>
+    </div>
+    <div class="col">
+      <div class="d-flex justify-content-between">
+        <p class="mb-0 lead_title">{{data.firstName}} {{data.lastName}}</p>
+        {% if data.openStatus == 'Pending'%}
+        <i class="bi bi-bell-fill text-danger"></i>
+        {% else %}
+        <i class="bi bi-bell-fill text-secondary"></i>
+        {% endif %}
+      </div>
+      <p class="mb-0 lead_subs">
+        {{data.car.year}} {{data.car.car.make.make.name}}
+        {{data.car.car.make.name}} {{data.car.car.name}}
+      </p>
+      <p class="mb-0 lead_subs">Reference : #{{data.car.referance}}</p>
+      <div class="d-flex justify-content-end">
+        <p class="mb-0 lead_subs_date text-secondary">{{data.date_created}}</p>
+      </div>
+    </div>
+  </div>
+</div>

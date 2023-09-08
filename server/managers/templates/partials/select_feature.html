@@ -1,0 +1,20 @@
+{% if features_list %}
+<div class="row">
+  {% for data in features_list %}
+  <div class="col-6 col-md-3 mb-3">
+    <button
+      type="button"
+      class="btn btn-light border border-2 position-relative"
+      style="font-size: 14px"
+    >
+      {{data.name}}
+      <span
+        class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger"
+      >
+        X
+      </span>
+    </button>
+  </div>
+  {% endfor %}
+</div>
+{% endif %}

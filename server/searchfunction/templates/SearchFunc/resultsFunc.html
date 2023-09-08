@@ -1,0 +1,42 @@
+{% extends 'client/base2.html' %}
+<!-- divider  -->
+{% load static %}
+<!-- divider  -->
+{% block content %}
+
+<div class="container">
+  <h1>Cars</h1>
+
+  <div class="my-5">
+    <form method="POST">
+      {% csrf_token %}
+
+      <div class="row">
+        <div class="col" id="refineBrand">
+          {% include 'refine/refineBrand.html' %}
+        </div>
+        <div class="col" id="refineModel">
+          {% include 'refine/refineModel.html' %}
+        </div>
+        <div class="col" id="refineVariant">
+          {% include 'refine/refineVariant.html' %}
+        </div>
+      </div>
+
+      <button
+        type="submit"
+        name="refineSearch"
+        class="btn btn-dark my-5"
+        hx-post="{% url 'cars-data' %}"
+        hx-target="#carsRefine"
+      >
+        Refine Search
+      </button>
+    </form>
+  </div>
+
+  <div id="carsRefine">{% include 'SearchFunc/carsData.html' %}</div>
+</div>
+
+<div style="height: 200px; width: 100%"></div>
+{% endblock %}

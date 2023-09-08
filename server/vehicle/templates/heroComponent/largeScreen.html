@@ -1,0 +1,129 @@
+<style>
+  .hero_image {
+    height: 500px;
+    width: 100%;
+    border-top-left-radius: 12px;
+    border-bottom-left-radius: 12px;
+    object-fit: cover;
+  }
+
+  .secondary_image {
+    height: 242px;
+    width: 100%;
+    object-fit: cover;
+  }
+
+  .car_title {
+    font-size: 26px;
+    font-weight: 400;
+    line-height: 20px;
+    color: var(--primary-color);
+  }
+
+  .back_btn_icon {
+    font-size: 22px;
+    cursor: pointer;
+  }
+</style>
+
+<!-- ======= Navbar  ======= -->
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <div class="container">
+    <a class="navbar-brand fw-bold" href="{% url 'index' %}">AutoWorld</a>
+    <button
+      class="navbar-toggler"
+      type="button"
+      data-bs-toggle="collapse"
+      data-bs-target="#navbarSupportedContent"
+      aria-controls="navbarSupportedContent"
+      aria-expanded="false"
+      aria-label="Toggle navigation"
+    >
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+          <a
+            class="nav-link active"
+            aria-current="page"
+            href="{% url 'index' %}"
+            >Home</a
+          >
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'inventory' %}">Cars</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'list-car' %}">List Car</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'account' %}">My Account</a>
+        </li>
+      </ul>
+      <form class="d-flex">
+        <input
+          class="form-control me-2"
+          type="search"
+          placeholder="Search"
+          aria-label="Search"
+        />
+        <button class="btn btn-dark" type="submit">Contact</button>
+      </form>
+    </div>
+  </div>
+</nav>
+
+<div class="container mt-5">
+  <i
+    class="bi bi-arrow-left-circle-fill back_btn_icon"
+    onclick="history.back()"
+  ></i>
+  <!-- ======= Name  ======= -->
+  <h1 class="car_title fw-bold mt-5">
+    {{carData.year}} {{carData.car.make.make.name}} {{carData.car.make.name}}
+    {{carData.car.name}} {{carData.transmission}}
+  </h1>
+  <p>
+    {{carData.sellerInfo.city.name}}, {{carData.sellerInfo.city.province.name}}
+  </p>
+  <!-- ======= Images  ======= -->
+  <div class="row mt-5">
+    <div class="col-6">
+      <div>
+        <img src="{{carData.images.image1.url}}" class="hero_image" />
+      </div>
+    </div>
+    <div class="col-3">
+      <div class="row">
+        <div class="col-12 mb-3">
+          <img src="{{carData.images.image2.url}}" class="secondary_image" />
+        </div>
+        <div class="col-12 mb-3">
+          <img src="{{carData.images.image3.url}}" class="secondary_image" />
+        </div>
+      </div>
+    </div>
+    <div class="col-3">
+      <div class="row">
+        <div class="col-12 mb-3">
+          <img
+            src="{{carData.images.image4.url}}"
+            class="secondary_image"
+            style="border-top-right-radius: 12px"
+          />
+        </div>
+        <div class="col-12 mb-3">
+          <img
+            src="{{carData.images.image2.url}}"
+            class="secondary_image"
+            style="border-bottom-right-radius: 12px"
+          />
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="d-flex justify-content-end">
+    {% include 'offcanvas/photos.html' %}
+  </div>
+</div>

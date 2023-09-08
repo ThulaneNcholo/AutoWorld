@@ -1,0 +1,70 @@
+<style>
+  .offcanvas-bottom {
+    height: 90vh;
+  }
+
+  .all_photos {
+    height: 400px;
+    width: 100%;
+    object-fit: cover;
+    border-radius: 12px;
+  }
+
+  .container_width {
+    width: 100%;
+    max-width: 600px;
+  }
+</style>
+
+<button
+  class="btn btn-dark mb-3"
+  type="button"
+  data-bs-toggle="offcanvas"
+  data-bs-target="#photos"
+  aria-controls="photos"
+>
+  <i class="bi bi-grid-3x3-gap-fill"></i> show all photos
+</button>
+
+<div
+  class="offcanvas offcanvas-bottom"
+  tabindex="-1"
+  id="photos"
+  aria-labelledby="photosLabel"
+>
+  <div class="offcanvas-header">
+    <!-- <h5 class="offcanvas-title" id="photosLabel">Offcanvas</h5> -->
+    <button
+      type="button"
+      class="btn-close text-reset"
+      data-bs-dismiss="offcanvas"
+      aria-label="Close"
+    ></button>
+  </div>
+  <div class="offcanvas-body">
+    <div class="container d-flex justify-content-center">
+      <div class="container_width">
+        <img
+          src="{{carData.images.image1.url}}"
+          alt=""
+          class="all_photos mb-3"
+        />
+        <img
+          src="{{carData.images.image2.url}}"
+          alt=""
+          class="all_photos mb-3"
+        />
+        <img
+          src="{{carData.images.image3.url}}"
+          alt=""
+          class="all_photos mb-3"
+        />
+        <img
+          src="{{carData.images.image4.url}}"
+          alt=""
+          class="all_photos mb-3"
+        />
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,86 @@
+<!-- ======= Summary ======= -->
+<div id="summary">
+  <ul class="list-group list-group-flush">
+    <li class="list-group-item py-3">
+      <div class="d-flex justify-content-between">
+        <p class="mb-0 text-secondary">Brand</p>
+        <p class="mb-0">{{carData.car.make.make.name}}</p>
+      </div>
+    </li>
+    <li class="list-group-item py-3">
+      <div class="d-flex justify-content-between">
+        <p class="mb-0 text-secondary">Model</p>
+        <p class="mb-0">{{carData.car.make.name}}</p>
+      </div>
+    </li>
+    <li class="list-group-item py-3">
+      <div class="d-flex justify-content-between">
+        <p class="mb-0 text-secondary">Variant</p>
+        <p class="mb-0">{{carData.car.name}}</p>
+      </div>
+    </li>
+    <li class="list-group-item py-3">
+      <div class="d-flex justify-content-between">
+        <p class="mb-0 text-secondary">Year</p>
+        <p class="mb-0">{{carData.year}}</p>
+      </div>
+    </li>
+    <li class="list-group-item py-3">
+      <div class="d-flex justify-content-between">
+        <p class="mb-0 text-secondary">kilometers</p>
+        <p class="mb-0">{{carData.kilometers}} km</p>
+      </div>
+    </li>
+    <li class="list-group-item py-3">
+      <div class="d-flex justify-content-between">
+        <p class="mb-0 text-secondary">Transmission</p>
+        <p class="mb-0">{{carData.transmission}}</p>
+      </div>
+    </li>
+    <li class="list-group-item py-3">
+      <div class="d-flex justify-content-between">
+        <p class="mb-0 text-secondary">Fuel Type</p>
+        <p class="mb-0">{{carData.Fuel}}</p>
+      </div>
+    </li>
+    <li class="list-group-item py-3">
+      <div class="d-flex justify-content-between">
+        <p class="mb-0 text-secondary">Body Type</p>
+        <p class="mb-0">{{carData.category.name}}</p>
+      </div>
+    </li>
+  </ul>
+</div>
+
+<!-- ======= Edit ======= -->
+<div id="edit" style="display: none">
+  {% include 'formData/general.html' %}
+
+  <!-- submit button  -->
+  <div class="contact_container fixed-bottom pt-3 shadow">
+    <div class="container">
+      <div class="row">
+        <div class="col">
+          <button
+            type="button"
+            class="btn btn-dark btn_contact"
+            onclick="submitBtn(event)"
+          >
+            submit
+          </button>
+        </div>
+        <div class="col-3">
+          <button
+            type="button"
+            class="btn btn-outline-dark btn_contact"
+            data-bs-dismiss="offcanvas"
+            aria-label="Close"
+          >
+            X
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div style="height: 100px; width: 100%"></div>
+</div>

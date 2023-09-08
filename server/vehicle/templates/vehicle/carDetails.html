@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <!-- Bootstrap CSS -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3"
+      crossorigin="anonymous"
+    />
+
+    <!-- Bootstrap Fonts  -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Nunito+Sans&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- htmx  -->
+    <script
+      src="https://unpkg.com/htmx.org@1.9.2"
+      integrity="sha384-L6OqL9pRWyyFU3+/bjdSri+iIphTN/bvYyM37tICVyOJkWZLpP2vGn6VUEXgzg6h"
+      crossorigin="anonymous"
+    ></script>
+
+    <!-- bootstrap icons  -->
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css"
+    />
+
+    <style>
+      body {
+        /* font-family: "Nunito Sans", sans-serif;  */
+        font-family: Circular, -apple-system, BlinkMacSystemFont, Roboto,
+          "Helvetica Neue", sans-serif !important;
+      }
+
+      /* Colors */
+      :root {
+        --primary-color: #222222;
+        --background-color: #e4eaff;
+        --secondary-color: #4a4685;
+        --secondary-background: #f5f5f7;
+      }
+
+      a {
+        text-decoration: none;
+        color: inherit;
+      }
+
+      .align {
+        align-items: baseline;
+      }
+
+      .sub_title {
+        font-size: 24px;
+        font-weight: 400;
+        line-height: 20px;
+      }
+
+      .secondary_sub_icons {
+        font-size: 18px;
+      }
+
+      .secondary_subs {
+        font-size: 18px;
+        font-weight: 400;
+        line-height: 20px;
+      }
+
+      .car_details_container {
+        padding: 24px 16px;
+        border-radius: 12px;
+      }
+
+      .car_details_container:hover {
+        background-color: var(--primary-color);
+        color: white !important;
+      }
+
+      .card_text {
+        /* color: rgb(34, 34, 34);  */
+        font-family: Circular, -apple-system, BlinkMacSystemFont, Roboto,
+          "Helvetica Neue", sans-serif !important;
+        font-weight: 600 !important;
+        font-size: 16px !important;
+        line-height: 20px !important;
+      }
+
+      .card_icon {
+        /* color: rgb(34, 34, 34);  */
+        font-size: 24px;
+      }
+
+      .offcanvas-bottom {
+        height: 90vh;
+        border-top-left-radius: 12px;
+        border-top-right-radius: 12px;
+      }
+    </style>
+
+    <title>AutoWorld</title>
+  </head>
+  <body>
+    <!-- ======= Large Screen Hero ======= -->
+    <div class="d-none d-sm-none d-md-block d-lg-block">
+      {% include 'heroComponent/largeScreen.html' %}
+    </div>
+
+    <!-- ======= Small Screen Hero ======= -->
+    <div class="d-md-none">{% include 'heroComponent/smallScreen.html' %}</div>
+
+    <!-- ======= Car Details ======= -->
+    <div class="container mt-5">
+      <!-- <h2 class="sub_title fw-bold mb-5">Car Details</h2> -->
+      <div class="d-flex align mb-3">
+        <i
+          class="bi bi-tags secondary_sub_icons"
+          style="margin-right: 20px"
+        ></i>
+        <h2 class="secondary_subs mb-0 fw-bold">R {{carData.price}}</h2>
+      </div>
+      <div class="d-flex align mb-3">
+        <i
+          class="bi bi-speedometer2 secondary_sub_icons"
+          style="margin-right: 20px"
+        ></i>
+        <h2 class="secondary_subs mb-0">{{carData.kilometers}} km</h2>
+      </div>
+      <div class="d-flex align mb-3">
+        <i
+          class="bi bi-fuel-pump secondary_sub_icons"
+          style="margin-right: 20px"
+        ></i>
+        <h2 class="secondary_subs mb-0">{{carData.Fuel}}</h2>
+      </div>
+      <div class="d-flex align mb-3">
+        <i
+          class="bi bi-diagram-3 secondary_sub_icons"
+          style="margin-right: 20px"
+        ></i>
+        <h2 class="secondary_subs mb-0">{{carData.transmission}}</h2>
+      </div>
+      <div class="d-flex align mb-3">
+        <i
+          class="bi bi-bookmark secondary_sub_icons"
+          style="margin-right: 20px"
+        ></i>
+        <h2 class="secondary_subs mb-0">
+          <span class="text-secondary">Reference</span> #{{carData.referance}}
+        </h2>
+      </div>
+
+      <hr class="text-secondary my-5" />
+      <p>{{carData.description}}</p>
+      <hr class="text-secondary my-5" />
+      <div class="row">
+        <!-- ======= Summary ======= -->
+        <div
+          class="col-6 col-md-4 col-md-3 mb-4 d-sm-block d-md-none d-lg-none"
+        >
+          {% include 'partials/summaryDetails.html' %}
+        </div>
+        <!-- summary small screen  -->
+        <div class="col-6 col-md-4 col-md-3 mb-4 d-none d-md-block">
+          {% include 'LargeScreenModals/summaryModal.html' %}
+        </div>
+
+        <!-- ======= Engine ======= -->
+        <div class="col-6 col-md-4 col-md-3 mb-4  d-sm-block d-md-none d-lg-none">
+          {% include 'partials/engineDetails.html' %}
+        </div>
+        <div class="col-6 col-md-4 col-md-3 mb-4 d-none d-md-block">
+          {% include 'LargeScreenModals/engineModal.html' %}
+        </div>
+
+        <!-- ======= Economy ======= -->
+        <div class="col-6 col-md-4 col-md-3 mb-4 d-sm-block d-md-none d-lg-none">
+          {% include 'partials/economyDetails.html' %}
+        </div>
+        <div class="col-6 col-md-4 col-md-3 mb-4 d-none d-md-block">
+          {% include 'LargeScreenModals/economyModal.html' %}
+        </div>
+
+
+        <!-- ======= Safety ======= -->
+        <div class="col-6 col-md-4 col-md-3 mb-4 d-md-none d-lg-none">
+          {% include 'partials/safetyDetails.html' %}
+        </div>
+        <div class="col-6 col-md-4 col-md-3 mb-4 d-none d-md-block">
+          {% include 'LargeScreenModals/safetyModal.html' %}
+        </div>
+
+        <!-- ======= Features ======= -->
+        <div class="col-6 col-md-4 col-md-3 mb-4 d-md-none d-lg-none">
+          {% include 'partials/featuresDetails.html' %}
+        </div>
+        <div class="col-6 col-md-4 col-md-3 mb-4 d-none d-md-block">
+          {% include 'LargeScreenModals/featuresModal.html' %}
+        </div>
+      </div>
+    </div>
+
+    <div style="height: 200px; width: 100%"></div>
+
+    <!-- Option 1: Bootstrap Bundle with Popper -->
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
+      crossorigin="anonymous"
+    ></script>
+  </body>
+</html>

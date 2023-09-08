@@ -1,0 +1,127 @@
+{% extends 'client/base2.html' %}
+<!-- divider  -->
+{% load static %}
+<!-- divider  -->
+{% block content %}
+<style>
+  /* Colors */
+  :root {
+    --primary-color: #222222;
+    --background-color: #e4eaff;
+    --secondary-color: #4a4685;
+    --secondary-background: #f5f5f7;
+  }
+
+  a {
+    text-decoration: none;
+    color: inherit;
+  }
+
+  .btn_message {
+    background-color: var(--primary-color);
+    width: 100%;
+    color: white;
+    border-radius: 8px;
+    padding-top: 14px;
+    padding-bottom: 14px;
+    padding-left: 24px;
+    padding-right: 24px;
+    border-color: var(--primary-color);
+  }
+
+  .message_container {
+    padding-bottom: 32px;
+  }
+</style>
+<div class="container mt-3">
+  <i class="bi bi-arrow-left-circle" onclick="history.back()"></i>
+</div>
+<div class="container mt-3">
+  <form method="POST" autocomplete="off">
+    {% csrf_token %}
+    <div class="row">
+      <div class="col-12 col-md-6">
+        <div class="form-floating mb-3">
+          <input
+            type="text"
+            class="form-control"
+            id="floatingInput"
+            name="firstName"
+            placeholder="First Name"
+          />
+          <label for="floatingInput">First Name</label>
+        </div>
+      </div>
+      <div class="col-12 col-md-6">
+        <div class="form-floating mb-3">
+          <input
+            type="text"
+            class="form-control"
+            id="floatingInput"
+            name="lastName"
+            placeholder="Last Name"
+          />
+          <label for="floatingInput">Last Name</label>
+        </div>
+      </div>
+      <div class="col-12 col-md-6">
+        <div class="form-floating mb-3">
+          <input
+            type="email"
+            class="form-control"
+            id="floatingInput"
+            name="email"
+            placeholder="name@example.com"
+          />
+          <label for="floatingInput">Email address</label>
+        </div>
+      </div>
+      <div class="col-12 col-md-6">
+        <div class="form-floating mb-3">
+          <input
+            type="number"
+            class="form-control"
+            id="floatingInput"
+            name="Mobile"
+            placeholder="Mobile"
+          />
+          <label for="floatingInput">Mobile</label>
+        </div>
+      </div>
+      <div class="col-12 col-md-6">
+        <select
+          class="form-select mb-3 py-3"
+          aria-label="Default select example"
+          name="area"
+        >
+          <option selected>Select Area</option>
+          {% for data in province %}
+          <option value="{{data.id}}">{{data.name}}</option>
+          {% endfor %}
+        </select>
+      </div>
+      <div class="col-12 col-md-6">
+        <label class="mb-2">Message</label>
+        <div class="form-floating">
+          <textarea
+            class="form-control"
+            placeholder="Leave a comment here"
+            id="floatingTextarea2"
+            name="message"
+            style="height: 100px"
+          >
+Please contact me with more information about your listing : {{carInfo.year}} {{carInfo.car.make.make.name}} {{carInfo.car.make.name}} {{carInfo.car.name}}. Reference : #{{carInfo.referance}}</textarea
+          >
+          <label for="floatingTextarea2"> </label>
+        </div>
+      </div>
+    </div>
+
+    <button type="submit" name="message_seller" class="btn btn_message mt-4">
+      Send message
+    </button>
+  </form>
+</div>
+
+<div style="height: 100px; width: 100%"></div>
+{% endblock %}

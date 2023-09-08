@@ -1,0 +1,12 @@
+<select
+  class="form-select"
+  aria-label="Default select example"
+  name="Variants"
+  hx-post="{% url 'cars-variants' %}"
+  hx-target="#VariantsCars"
+>
+  <option value="None">Select Variant</option>
+  {% for data in variants %}
+  <option value="{{data.id}}">{{data.name}}</option>
+  {% endfor %}
+</select>

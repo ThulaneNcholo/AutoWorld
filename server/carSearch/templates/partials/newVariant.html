@@ -1,0 +1,15 @@
+<select
+  class="form-select py-3"
+  aria-label="Default select example"
+  name="newVariant"
+>
+  {% if selectedVariant %}
+  <option value="{{selectedVariant.id}}">{{selectedVariant.name}}</option>
+  {% else%}
+  <option selected value="None">Select Car Variant</option>
+  {% endif %}
+  <!-- divider  -->
+  {% for data in carVariants %}
+  <option value="{{data.id}}">{{data.name}}</option>
+  {% endfor %}
+</select>

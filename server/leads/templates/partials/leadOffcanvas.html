@@ -1,0 +1,44 @@
+<a
+  data-bs-toggle="offcanvas"
+  href="#leadDetails{{data.id}}"
+  aria-controls="leadDetails"
+>
+  {% include 'partials/leadsData.html' %}
+</a>
+
+<div
+  class="offcanvas offcanvas-bottom"
+  tabindex="-1"
+  id="leadDetails{{data.id}}"
+  aria-labelledby="leadDetailsLabel"
+>
+  <div class="offcanvas-header">
+    <h5 class="offcanvas-title" id="leadDetailsLabel">#{{data.ref}}</h5>
+    <button
+      type="button"
+      class="btn-close text-reset"
+      data-bs-dismiss="offcanvas"
+      aria-label="Close"
+    ></button>
+  </div>
+  <div class="offcanvas-body">
+    {% include 'partials/leadsBody.html' %}
+    <div style="height: 100px; width: 100%"></div>
+    <!-- mark as compomlete  -->
+    <form method="POST">
+      {% csrf_token %}
+      <input type="text" name="leadID" value="{{data.id}}" hidden="true" />
+      <div class="fixed-bottom complete_container pt-3">
+        <center>
+          <button
+            type="submit"
+            name="complet_lead"
+            class="btn btn-dark complete_btn rounded-pill shadow shadow-sm"
+          >
+            complete lead
+          </button>
+        </center>
+      </div>
+    </form>
+  </div>
+</div>

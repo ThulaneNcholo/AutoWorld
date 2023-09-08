@@ -1,0 +1,25 @@
+<a
+  data-bs-toggle="offcanvas"
+  href="#featuresDetails"
+  aria-controls="featuresDetails"
+>
+  {% include 'buttons/featuresBtn.html' %}
+</a>
+
+<div
+  class="offcanvas offcanvas-bottom"
+  tabindex="-1"
+  id="featuresDetails"
+  aria-labelledby="featuresDetailsLabel"
+>
+  <div class="offcanvas-header">
+    <h5 class="offcanvas-title" id="featuresDetailsLabel">Features</h5>
+    <button
+      type="button"
+      class="btn-close text-reset"
+      data-bs-dismiss="offcanvas"
+      aria-label="Close"
+    ></button>
+  </div>
+  <div class="offcanvas-body">{% include 'BodyData/featuresData.html' %}</div>
+</div>

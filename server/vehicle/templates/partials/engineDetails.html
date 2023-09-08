@@ -1,0 +1,54 @@
+<a
+  data-bs-toggle="offcanvas"
+  href="#engineDetails"
+  aria-controls="engineDetails"
+>
+  {% include 'buttons/engineBtn.html' %}
+</a>
+
+<div
+  class="offcanvas offcanvas-bottom"
+  tabindex="-1"
+  id="engineDetails"
+  aria-labelledby="engineDetailsLabel"
+>
+  <div class="offcanvas-header">
+    <h5 class="offcanvas-title" id="engineDetailsLabel">Engine</h5>
+    <button
+      type="button"
+      class="btn-close text-reset"
+      data-bs-dismiss="offcanvas"
+      aria-label="Close"
+    ></button>
+  </div>
+  <div class="offcanvas-body">
+    {% include 'BodyData/enginedata.html' %}
+    <!-- edit button  -->
+    <div class="contact_container fixed-bottom pt-3 shadow">
+      <div class="container">
+        <div class="row">
+          <div class="col">
+            <button
+              type="button"
+              class="btn btn-dark btn_contact"
+              onclick="editSummary(event)"
+            >
+              Edit
+            </button>
+          </div>
+          <div class="col-3">
+            <button
+              type="button"
+              class="btn btn-outline-dark btn_contact"
+              data-bs-dismiss="offcanvas"
+              aria-label="Close"
+            >
+              X
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div style="height: 100px; width: 100%"></div>
+  </div>
+</div>

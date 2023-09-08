@@ -1,0 +1,12 @@
+<select
+  class="form-select"
+  aria-label="Default select example"
+  name="refineBrand"
+  hx-post="{% url 'refine-model' %}"
+  hx-target="#refineModel"
+>
+  <option value="None">Select Car Brand</option>
+  {% for data in refineBrands %}
+  <option value="{{data.id}}">{{data.name}}</option>
+  {% endfor %}
+</select>

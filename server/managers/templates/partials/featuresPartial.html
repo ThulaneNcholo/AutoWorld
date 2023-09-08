@@ -1,0 +1,21 @@
+<div class="row">
+  {% for data in carFeatures %}
+  <div class="col-6 col-md-3 mb-3">
+    <input
+      type="checkbox"
+      class="btn-check"
+      value="{{data.id}}"
+      name="featureID"
+      id="option{{data.id}}"
+      autocomplete="off"
+      hx-post="{% url 'add-feature' %}"
+      hx-trigger="change"
+      hx-target="#SelectedFeature"
+    />
+    <label class="btn btn-outline-dark" for="option{{data.id}}"
+      >{{data.name}}</label
+    >
+  </div>
+  {% endfor %}
+  <!-- end radio item  -->
+</div>

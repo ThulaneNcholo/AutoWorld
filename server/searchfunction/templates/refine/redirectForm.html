@@ -1,0 +1,28 @@
+{% extends 'client/base.html' %}
+<!-- divider  -->
+{% load static %}
+<!-- divider  -->
+{% block content %}
+
+<div class="container" id="content-container">
+  <h1 class="mb-5">Redirect Form</h1>
+  <form hx-post="{% url 'redirect-form' %}" hx-swap="outerHTML" hx-target="#content-container">
+    {% csrf_token %}
+    <div class="row">
+      <div class="col-12 mb-3">{% include 'partials/brand.html' %}</div>
+      <div class="col-12 mb-3" id="modelCar">
+        {% include 'partials/modelCar.html' %}
+      </div>
+      <div class="col-12 mb-3" id="VariantsCars">
+        {% include 'partials/whipsVariants.html' %}
+      </div>
+    </div>
+
+    <button type="submit" name="redirect_filter" class="btn btn-dark my-5">
+      show results
+    </button>
+  </form>
+</div>
+
+<div style="height: 200px; width: 100%"></div>
+{% endblock %}

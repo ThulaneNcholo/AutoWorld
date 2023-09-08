@@ -1,0 +1,15 @@
+<div class="col-12" id="carModel">
+  <select
+    class="form-select py-3 mb-3"
+    aria-label="Default select example"
+    hx-post="{% url 'filter-variant' %}"
+    hx-target="#carVariant"
+    name="variant"
+    required
+  >
+    <option value="None">Select Car Model</option>
+    {% for data in models %}
+    <option value="{{data.id}}">{{data.name}}</option>
+    {% endfor %}
+  </select>
+</div>

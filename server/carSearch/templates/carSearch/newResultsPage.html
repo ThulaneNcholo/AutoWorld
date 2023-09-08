@@ -1,0 +1,542 @@
+{% extends 'client/base.html' %}
+<!-- divider  -->
+{% load static %}
+<!-- divider  -->
+{% load humanize %}
+<!-- divider  -->
+{% block content %}
+<style>
+  :root {
+    --primary-color: #222222;
+    --background-color: #e4eaff;
+    --secondary-color: #4a4685;
+    --secondary-background: #f5f5f7;
+  }
+
+  a {
+    text-decoration: none;
+    color: inherit;
+  }
+
+  .offcanvas-bottom {
+    height: 90vh;
+    border-top-left-radius: 12px;
+    border-top-right-radius: 12px;
+  }
+
+  /* Feature styling  */
+  .main_container {
+    border-radius: 12px;
+    background-color: var(--secondary-background);
+  }
+
+  .image_container {
+    height: 100px;
+    width: 130px;
+    border-radius: 12px;
+    margin-right: 10px;
+  }
+
+  .feature_image {
+    height: 100%;
+    width: 100%;
+    border-radius: 12px;
+    object-fit: cover;
+  }
+
+  .p-tags {
+    font-size: 14px;
+  }
+
+  /* refine search offcanvas style  */
+  .refine_offcanvas {
+    height: 50vh !important;
+    border-top-left-radius: 12px;
+    border-top-right-radius: 12px;
+  }
+
+  .refine_btn {
+    width: 100%;
+    border-radius: 12px;
+    margin-right: 20px;
+  }
+
+  .btn_refine {
+    width: 50%;
+    border-radius: 12px;
+    margin-right: 20px;
+  }
+
+  /* Style Filter results  */
+  .filter_btn {
+    width: 100%;
+    border-radius: 12px;
+  }
+
+  .filter_options {
+    width: 100%;
+  }
+
+  .offcanvas-bottom {
+    height: 90vh;
+    border-top-left-radius: 12px;
+    border-top-right-radius: 12px;
+  }
+
+  .back_btn_icon {
+    font-size: 22px;
+    cursor: pointer;
+  }
+</style>
+
+<div class="container my-5">
+  <i
+    class="bi bi-arrow-left-circle-fill back_btn_icon"
+    onclick="history.back()"
+  ></i>
+
+  <!-- refine search filter  -->
+  <div class="row mt-5">
+    <div class="col">
+      <button
+        class="btn btn-dark refine_btn"
+        data-bs-toggle="offcanvas"
+        data-bs-target="#searchRefine"
+        aria-controls="searchRefine"
+      >
+        Refine Search
+      </button>
+
+      <!-- offcancas start  -->
+      <div
+        class="offcanvas offcanvas-bottom refine_offcanvas"
+        tabindex="-1"
+        id="searchRefine"
+        aria-labelledby="searchRefineLabel"
+      >
+        <div class="offcanvas-header">
+          <h5 class="offcanvas-title" id="searchRefineLabel">
+            Refine car search
+          </h5>
+          <button
+            type="button"
+            class="btn-close text-reset"
+            data-bs-dismiss="offcanvas"
+            aria-label="Close"
+          ></button>
+        </div>
+        <div class="offcanvas-body">
+          <!-- ======= Car Make ======= -->
+          {% include 'partials/newMake.html' %}
+
+          <!-- ======= Car Model ======= -->
+          <div id="newModelID">{% include 'partials/newModel.html' %}</div>
+
+          <form method="POST">
+            {% csrf_token %}
+            <!-- ======= Car Variant ======= -->
+            <div id="newVarientID">
+              {% include 'partials/newVariant.html' %}
+            </div>
+
+            <center>
+              <button
+                type="submit"
+                name="refine_search"
+                class="btn btn-dark btn_refine py-3 my-5"
+              >
+                Refine Search
+              </button>
+            </center>
+          </form>
+        </div>
+      </div>
+    </div>
+    <div class="col">
+      <button
+        class="btn btn-outline-dark filter_btn shadow shadow-sm"
+        type="button"
+        data-bs-toggle="offcanvas"
+        data-bs-target="#searchFilter"
+        aria-controls="offcanvasExample"
+      >
+        Filter results
+      </button>
+
+      <div
+        class="offcanvas offcanvas-bottom"
+        tabindex="-1"
+        id="searchFilter"
+        aria-labelledby="offcanvasExampleLabel"
+      >
+        <div class="offcanvas-header">
+          <h5 class="offcanvas-title" id="offcanvasExampleLabel">Filter</h5>
+          <button
+            type="button"
+            class="btn-close text-reset"
+            data-bs-dismiss="offcanvas"
+            aria-label="Close"
+          ></button>
+        </div>
+        <div class="offcanvas-body">
+          <div class="container">
+            <form method="POST">
+              {% csrf_token %}
+              <!-- ======= Price Filter ======= -->
+              <h4>Price</h4>
+              <div class="row mt-3 mb-5">
+                <div class="col">
+                  <input
+                    type="radio"
+                    class="btn-check"
+                    name="price"
+                    id="pricelow"
+                    value="pricelow"
+                    autocomplete="off"
+                  />
+                  <label
+                    class="btn btn-outline-dark filter_options"
+                    for="pricelow"
+                    >Low to High</label
+                  >
+                </div>
+                <div class="col">
+                  <input
+                    type="radio"
+                    class="btn-check"
+                    name="price"
+                    id="priceHigh"
+                    value="priceHigh"
+                    autocomplete="off"
+                  />
+                  <label
+                    class="btn btn-outline-dark filter_options"
+                    for="priceHigh"
+                    >High to Low</label
+                  >
+                </div>
+              </div>
+              <!-- ======= Year Filter ======= -->
+              <h4>Year</h4>
+              <div class="row mt-3 mb-5">
+                <div class="col">
+                  <input
+                    type="radio"
+                    class="btn-check"
+                    name="Year"
+                    id="yearLow"
+                    value="yearLow"
+                    autocomplete="off"
+                  />
+                  <label
+                    class="btn btn-outline-dark filter_options"
+                    for="yearLow"
+                    >Low to High</label
+                  >
+                </div>
+                <div class="col">
+                  <input
+                    type="radio"
+                    class="btn-check"
+                    name="Year"
+                    id="yearHigh"
+                    value="yearHigh"
+                    autocomplete="off"
+                  />
+                  <label
+                    class="btn btn-outline-dark filter_options"
+                    for="yearHigh"
+                    >High to Low</label
+                  >
+                </div>
+              </div>
+              <!-- ======= Mileage Filter ======= -->
+              <h4>Mileage</h4>
+              <div class="row mt-3 mb-5">
+                <div class="col">
+                  <input
+                    type="radio"
+                    class="btn-check"
+                    name="mileage"
+                    id="mileageLow"
+                    value="mileageLow"
+                    autocomplete="off"
+                  />
+                  <label
+                    class="btn btn-outline-dark filter_options"
+                    for="mileageLow"
+                    >Low to High</label
+                  >
+                </div>
+                <div class="col">
+                  <input
+                    type="radio"
+                    class="btn-check"
+                    name="mileage"
+                    id="mileageHigh"
+                    value="mileageHigh"
+                    autocomplete="off"
+                  />
+                  <label
+                    class="btn btn-outline-dark filter_options"
+                    for="mileageHigh"
+                    >High to Low</label
+                  >
+                </div>
+              </div>
+              <!-- ======= Most Recent Filter ======= -->
+              <h4>Most Recent</h4>
+              <div class="row mt-3 mb-5">
+                <div class="col">
+                  <input
+                    type="radio"
+                    class="btn-check"
+                    name="recent"
+                    id="recent"
+                    value="recent"
+                    autocomplete="off"
+                  />
+                  <label
+                    class="btn btn-outline-dark filter_options"
+                    for="recent"
+                    >Recent</label
+                  >
+                </div>
+                <div class="col">
+                  <input
+                    type="radio"
+                    class="btn-check"
+                    name="recent"
+                    id="old"
+                    value="old"
+                    autocomplete="off"
+                  />
+                  <label class="btn btn-outline-dark filter_options" for="old"
+                    >Old</label
+                  >
+                </div>
+              </div>
+              <div class="mt-5" id="advancedFilter" style="display: none">
+                <h3 class="text-secondary mb-3">Advanced Filter</h3>
+                <!-- ======= Transmission Filter ======= -->
+                <h4>Transmission</h4>
+                <div class="row mt-3 mb-5">
+                  <div class="col">
+                    <input
+                      type="radio"
+                      class="btn-check"
+                      name="transmission"
+                      id="auto"
+                      value="auto"
+                      autocomplete="off"
+                    />
+                    <label
+                      class="btn btn-outline-dark filter_options"
+                      for="auto"
+                      >Auto</label
+                    >
+                  </div>
+                  <div class="col">
+                    <input
+                      type="radio"
+                      class="btn-check"
+                      name="transmission"
+                      id="manual"
+                      value="manual"
+                      autocomplete="off"
+                    />
+                    <label
+                      class="btn btn-outline-dark filter_options"
+                      for="manual"
+                      >Manual</label
+                    >
+                  </div>
+                </div>
+                <!-- ======= Fuel Filter ======= -->
+                <h4>Fuel</h4>
+                <div class="row mt-3 mb-5">
+                  <div class="col">
+                    <input
+                      type="radio"
+                      class="btn-check"
+                      name="fuel"
+                      id="patrol"
+                      value="patrol"
+                      autocomplete="off"
+                    />
+                    <label
+                      class="btn btn-outline-dark filter_options"
+                      for="patrol"
+                      >Patrol</label
+                    >
+                  </div>
+                  <div class="col">
+                    <input
+                      type="radio"
+                      class="btn-check"
+                      name="fuel"
+                      id="diesel"
+                      value="diesel"
+                      autocomplete="off"
+                    />
+                    <label
+                      class="btn btn-outline-dark filter_options"
+                      for="diesel"
+                      >Diesel</label
+                    >
+                  </div>
+                </div>
+                <!-- ======= Body Filter ======= -->
+                <h4>Body type</h4>
+                <div class="row mt-3 mb-5">
+                  <div class="col">
+                    <input
+                      type="radio"
+                      class="btn-check"
+                      name="body"
+                      id="coupe"
+                      value="coupe"
+                      autocomplete="off"
+                    />
+                    <label
+                      class="btn btn-outline-dark filter_options"
+                      for="coupe"
+                      >Coupe</label
+                    >
+                  </div>
+                  <div class="col">
+                    <input
+                      type="radio"
+                      class="btn-check"
+                      name="body"
+                      id="convertible"
+                      value="convertible"
+                      autocomplete="off"
+                    />
+                    <label
+                      class="btn btn-outline-dark filter_options"
+                      for="convertible"
+                      >Convertible</label
+                    >
+                  </div>
+                </div>
+                <!-- ======= Seller Filter ======= -->
+                <h4>Seller type</h4>
+                <div class="row mt-3 mb-5">
+                  <div class="col">
+                    <input
+                      type="radio"
+                      class="btn-check"
+                      name="seller"
+                      id="private"
+                      value="private"
+                      autocomplete="off"
+                    />
+                    <label
+                      class="btn btn-outline-dark filter_options"
+                      for="private"
+                      >Private</label
+                    >
+                  </div>
+                  <div class="col">
+                    <input
+                      type="radio"
+                      class="btn-check"
+                      name="seller"
+                      id="dealership"
+                      value="dealership"
+                      autocomplete="off"
+                    />
+                    <label
+                      class="btn btn-outline-dark filter_options"
+                      for="dealership"
+                      >Dealership</label
+                    >
+                  </div>
+                </div>
+              </div>
+
+              <div class="row mb-5">
+                <div class="col">
+                  <a
+                    role="button"
+                    onclick="advancedFilter(event)"
+                    class="btn btn-light border border-2 shadow shadow-sm filter_options py-3"
+                    ><i class="bi bi-funnel-fill"></i> More Filters</a
+                  >
+                </div>
+                <div class="col">
+                  <button
+                    type="submit"
+                    name="submit_filter"
+                    class="btn btn-dark filter_options py-3 shadow shadow-sm"
+                  >
+                    <i class="bi bi-plus-circle text-light"></i> Submit Filter
+                  </button>
+                </div>
+              </div>
+            </form>
+          </div>
+          <div style="height: 35px; width: 100%"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Car results start  -->
+  <div class="row mt-5">
+    {% for data in cars %}
+    <div class="col-12 col-md-6">
+      <a href="{% url 'car-details' data.id %}">
+        <div class="d-flex p-3 main_container mb-3">
+          <div class="image_container">
+            <img src="{{data.images.image1.url}}" class="feature_image" />
+          </div>
+          <div>
+            <p class="mb-1 fw-bold p-tags">
+              {{data.year}} {{data.car.make.make.name}} {{data.car.name}}
+              {{data.transmission}}
+            </p>
+            <div class="d-flex justify-content-between mb-2 secondary_text">
+              <div class="d-flex">
+                <i
+                  class="bi bi-speedometer2 icon_margin"
+                  style="margin-right: 10px"
+                ></i>
+                <p class="mb-0 p-tags">{{data.kilometers}} km</p>
+              </div>
+              <div>|</div>
+              <div class="d-flex">
+                <i
+                  class="bi bi-fuel-pump icon_margin"
+                  style="margin-right: 10px"
+                ></i>
+                <p class="mb-0 p-tags">{{data.Fuel}}</p>
+              </div>
+            </div>
+            <p class="fw-bold secondary_text mb-0 p-tags">
+              R {{data.price|intcomma}}
+            </p>
+          </div>
+        </div>
+      </a>
+    </div>
+    <!-- end item object  -->
+    {% endfor %}
+  </div>
+</div>
+
+<div style="height: 200px; width: 100%"></div>
+
+<script>
+  function advancedFilter() {
+    event.preventDefault();
+    var x = document.getElementById("advancedFilter");
+    if (x.style.display === "none") {
+      x.style.display = "block";
+    } else {
+      x.style.display = "none";
+    }
+  }
+</script>
+{% endblock %}

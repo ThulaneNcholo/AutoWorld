@@ -1,0 +1,107 @@
+<ul class="list-group list-group-flush">
+  <li class="list-group-item my-3 mx-0 px-0">
+    <div class="row">
+      <div class="col">
+        <p class="text-secondary mb-0">Full Name</p>
+      </div>
+      <div class="col">
+        <p class="mb-0">{{data.firstName}} {{data.lastName}}</p>
+      </div>
+    </div>
+  </li>
+  <!-- end list item  -->
+  <li class="list-group-item my-3 mx-0 px-0">
+    <div class="row">
+      <div class="col">
+        <p class="text-secondary mb-0">Mobile</p>
+      </div>
+      <div class="col">
+        <p class="mb-0">{{data.mobile}}</p>
+      </div>
+    </div>
+  </li>
+  <!-- end list item  -->
+  <li class="list-group-item my-3 mx-0 px-0">
+    <div class="row">
+      <div class="col">
+        <p class="text-secondary mb-0">Mobile</p>
+      </div>
+      <div class="col">
+        <p class="mb-0">{{data.email}}</p>
+      </div>
+    </div>
+  </li>
+  <!-- end list item  -->
+  <li class="list-group-item my-3 mx-0 px-0">
+    <div class="row">
+      <div class="col">
+        <p class="text-secondary mb-0">Area</p>
+      </div>
+      <div class="col">
+        <p class="mb-0">{{data.area.name}}</p>
+      </div>
+    </div>
+  </li>
+  <!-- end list item  -->
+  <li class="list-group-item my-3 mx-0 px-0">
+    <div class="row">
+      <div class="col">
+        <p class="text-secondary mb-0">Lead Referance</p>
+      </div>
+      <div class="col">
+        <p class="mb-0">#{{data.ref}}</p>
+      </div>
+    </div>
+  </li>
+  <!-- end list item  -->
+  <li class="list-group-item my-3 mx-0 px-0">
+    <div class="row">
+      <div class="col">
+        <p class="text-secondary mb-0">Car Referance</p>
+      </div>
+      <div class="col">
+        <p class="mb-0">#{{data.car.referance}}</p>
+      </div>
+    </div>
+  </li>
+  <!-- end list item  -->
+  <li class="list-group-item my-3 bg-light border" style="border-radius: 12px">
+    <div class="row">
+      <div class="col-12 mb-3">
+        <p class="text-secondary mb-0">Message</p>
+      </div>
+      <div class="col-12">
+        <p>{{data.message}}</p>
+      </div>
+    </div>
+  </li>
+</ul>
+
+<!-- Car  -->
+<a href="{% url 'car-details' data.car.id %}">
+  <div class="d-flex p-3 main_container mb-3 border">
+    <div class="image_container">
+      <img src="{{data.car.images.image1.url}}" class="feature_image" />
+    </div>
+    <div>
+      <p class="mb-1 fw-bold p-tags">
+        {{data.car.year}} {{data.car.car.make.make.name}} {{data.car.car.name}}
+        {{data.car.transmission}}
+      </p>
+      <div class="d-flex">
+        <i
+          class="bi bi-speedometer2 icon_margin"
+          style="margin-right: 10px"
+        ></i>
+        <p class="mb-0 p-tags">{{data.car.kilometers}} km</p>
+      </div>
+      <p class="fw-bold secondary_text mb-0 p-tags mt-2">
+        R {{data.car.price}}
+      </p>
+    </div>
+  </div>
+</a>
+
+
+
+
